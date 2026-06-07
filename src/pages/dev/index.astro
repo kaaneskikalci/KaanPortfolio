@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+// Featured projects first, then newest year first.
+const projects = (await getCollection('dev')).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.year - a.data.year;
+});
+---
+
+<BaseLayout
+  title="Development"
+  description="Gameplay programming in C++/C# with Unity and Unreal by Kaan Eskikalci."
+>
+  <div class="container">
+    <h1 class="section-heading">Development</h1>
+    <p class="section-intro">
+      Gameplay programming in C++/C#, Unity &amp; Unreal.
+    </p>
+
+    {
+      projects.length > 0 ? (
+        <div class="project-grid">
+          {projects.map((p) => (
+            <ProjectCard
+              href={`/dev/${p.id}`}
+              cover={p.data.cover}
+              title={p.data.title}
+              summary={p.data.summary}
+              meta={p.data.engine}
+              tags={p.data.tools}
+            />
+          ))}
+        </div>
+      ) : (
+        <p style="color: var(--muted)">Projects coming soon.</p>
+      )
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+// Featured projects first, then newest year first.
+const projects = (await getCollection('art')).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.year - a.data.year;
+});
+---
+
+<BaseLayout
+  title="Art & Game Design"
+  description="3D environments, level design, and visual work by Kaan Eskikalci."
+>
+  <div class="container">
+    <h1 class="section-heading">Art &amp; Game Design</h1>
+    <p class="section-intro">
+      3D environments, level design, and visual work.
+    </p>
+
+    {
+      projects.length > 0 ? (
+        <div class="project-grid">
+          {projects.map((p) => (
+            <ProjectCard
+              href={`/art/${p.id}`}
+              cover={p.data.cover}
+              title={p.data.title}
+              summary={p.data.summary}
+              meta={p.data.medium}
+              tags={p.data.tools}
+            />
+          ))}
+        </div>
+      ) : (
+        <p style="color: var(--muted)">Projects coming soon.</p>
+      )
+    }
+  </div>
+</BaseLayout>

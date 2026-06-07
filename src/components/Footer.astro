@@ -1,0 +1,70 @@
+---
+import { SITE, SOCIALS } from '../consts';
+
+const year = new Date().getFullYear();
+const socials = SOCIALS.filter((s) => s.url); // only show links that are filled in
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">{SITE.name}</p>
+      <p class="footer-tag">{SITE.title}</p>
+    </div>
+
+    <nav class="footer-links" aria-label="Footer">
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      {socials.map((s) => <a href={s.url} target="_blank" rel="noopener">{s.label}</a>)}
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <small>© {year} {SITE.name}. All rights reserved.</small>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding-block: var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer-name {
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .footer-tag {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-4);
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-4);
+    color: var(--muted);
+  }
+</style>

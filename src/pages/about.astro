@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, SKILLS } from '../consts';
+import portrait from '../assets/placeholders/portrait.svg';
+---
+
+<BaseLayout title="About">
+  <div class="container">
+    <h1 class="section-heading">About</h1>
+
+    <div class="about-grid">
+      <div class="about-photo">
+        <Image src={portrait} alt={`Portrait of ${SITE.name}`} width={480} />
+      </div>
+
+      <div class="about-bio">
+        <!-- Replace this with your real introduction. Keep it short and human:
+             who you are, what you make, and what you're looking for. -->
+        <p>
+          Hi — I'm {SITE.name}, a soon-to-graduate game designer who works across
+          two sides of game development: <strong>art &amp; game design</strong>
+          (3D environments, level design, and visual work) and
+          <strong>development</strong> (gameplay programming in C++ and C# with
+          Unity and Unreal).
+        </p>
+        <p>
+          This is placeholder text. Tell your story here: what kinds of games and
+          experiences you care about, the kind of role or studio you're hoping to
+          join, and anything that makes your perspective distinct.
+        </p>
+        <p>
+          <a class="button" href="/contact">Get in touch</a>
+        </p>
+      </div>
+    </div>
+
+    <h2 class="skills-heading">Skills</h2>
+    <div class="skills">
+      {
+        SKILLS.map((group) => (
+          <div class="skill-group">
+            <h3>{group.group}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <li class="tag">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-5);
+    align-items: start;
+    margin-bottom: var(--space-6);
+  }
+  .about-photo :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  .about-bio p {
+    margin-bottom: var(--space-3);
+  }
+  .skills-heading {
+    margin-bottom: var(--space-4);
+  }
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+  .skill-group h3 {
+    margin-bottom: var(--space-3);
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .skill-group ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 640px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-photo {
+      max-width: 240px;
+    }
+  }
+</style>

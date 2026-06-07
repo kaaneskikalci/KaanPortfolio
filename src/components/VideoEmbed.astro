@@ -1,0 +1,83 @@
+---
+// Lightweight YouTube embed. Shows just a thumbnail + play button, and only
+// loads the heavy YouTube iframe after the visitor clicks. This keeps pages
+// fast (no third-party scripts on load). Pass a YouTube video id.
+interface Props {
+  id: string;
+  title?: string;
+}
+const { id, title = 'Video' } = Astro.props;
+const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<div class="video" data-video-id={id}>
+  <button class="video-button" type="button" aria-label={`Play: ${title}`}>
+    <img src={thumb} alt={`${title} thumbnail`} loading="lazy" width="480" height="360" />
+    <span class="video-play" aria-hidden="true">▶</span>
+  </button>
+</div>
+
+<style>
+  .video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--border);
+  }
+  .video-button {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .video-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity var(--transition);
+  }
+  .video-button:hover img {
+    opacity: 1;
+  }
+  .video-play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    color: #fff;
+    background: color-mix(in srgb, var(--accent) 85%, #000);
+    border-radius: 999px;
+    padding-left: 4px;
+  }
+  .video :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+
+<script>
+  // On click, swap the thumbnail facade for the real YouTube iframe.
+  document.querySelectorAll<HTMLElement>('.video').forEach((el) => {
+    const button = el.querySelector('.video-button');
+    button?.addEventListener('click', () => {
+      const id = el.dataset.videoId;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = 'Video player';
+      el.replaceChildren(iframe);
+    });
+  });
+</script>

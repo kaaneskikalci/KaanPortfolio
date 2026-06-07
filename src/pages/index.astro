@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout>
+  <section class="hero container">
+    <p class="eyebrow">{SITE.title}</p>
+    <h1>{SITE.name}</h1>
+    <p class="hero-tagline">{SITE.tagline}</p>
+  </section>
+
+  <!-- The defining split: two large cards make it instantly clear that
+       Kaan works across both art/design and development. -->
+  <section class="split container" aria-label="Choose a section">
+    <a href="/art" class="split-card split-card--art">
+      <span class="split-index">01</span>
+      <h2>Art &amp; Game Design</h2>
+      <p>3D environments, level design, and visual work.</p>
+      <span class="split-cta">View work →</span>
+    </a>
+
+    <a href="/dev" class="split-card split-card--dev">
+      <span class="split-index">02</span>
+      <h2>Development</h2>
+      <p>Gameplay programming in C++/C#, Unity &amp; Unreal.</p>
+      <span class="split-cta">View projects →</span>
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-6) var(--space-5);
+    text-align: center;
+  }
+
+  .eyebrow {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-inline: auto;
+  }
+
+  .hero h1 {
+    margin-block: var(--space-2);
+  }
+
+  .hero-tagline {
+    color: var(--muted);
+    font-size: 1.15rem;
+    margin-inline: auto;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .split-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 320px;
+    padding: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--fg);
+    overflow: hidden;
+    transition: transform var(--transition), border-color var(--transition);
+  }
+
+  /* A soft accent glow distinguishes the two sides without adding clutter. */
+  .split-card--art {
+    background-image: radial-gradient(
+      120% 80% at 0% 0%,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 60%
+    );
+  }
+  .split-card--dev {
+    background-image: radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in srgb, #b08cff 22%, transparent),
+      transparent 60%
+    );
+  }
+
+  .split-card:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .split-index {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-5);
+    font-family: var(--font-mono);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .split-card h2 {
+    margin-bottom: var(--space-2);
+  }
+
+  .split-card p {
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .split-cta {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+    .split-card {
+      min-height: 220px;
+    }
+  }
+</style>

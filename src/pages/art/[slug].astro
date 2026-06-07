@@ -1,0 +1,173 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import SketchfabEmbed from '../../components/SketchfabEmbed.astro';
+
+// Generate one page per art project at build time.
+export async function getStaticPaths() {
+  const entries = await getCollection('art');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <article class="container detail">
+    <a class="back" href="/art">← Art &amp; Game Design</a>
+
+    <header class="detail-header">
+      <span class="card-meta">{data.medium}</span>
+      <h1>{data.title}</h1>
+      <p class="detail-summary">{data.summary}</p>
+      <ul class="meta-row">
+        <li><strong>Role</strong> {data.role}</li>
+        <li><strong>Year</strong> {data.year}</li>
+      </ul>
+      {
+        data.tools.length > 0 && (
+          <ul class="tag-row">
+            {data.tools.map((t) => (
+              <li class="tag">{t}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <!-- Art leads with visuals: video if present, otherwise the cover. -->
+    <div class="hero-media">
+      {
+        data.video ? (
+          <VideoEmbed id={data.video} title={data.title} />
+        ) : (
+          <Image
+            src={data.cover}
+            alt={`${data.title}`}
+            widths={[600, 1200]}
+            sizes="(max-width: 1100px) 100vw, 1100px"
+            class="cover"
+          />
+        )
+      }
+    </div>
+
+    {data.sketchfab && <SketchfabEmbed id={data.sketchfab} title={data.title} />}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      data.gallery.length > 0 && (
+        <div class="gallery">
+          {data.gallery.map((img, i) => (
+            <Image
+              src={img}
+              alt={`${data.title} — image ${i + 1}`}
+              widths={[600, 1200]}
+              sizes="(max-width: 700px) 100vw, 50vw"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      data.links.length > 0 && (
+        <div class="links">
+          {data.links.map((l) => (
+            <a class="button button--ghost" href={l.url} target="_blank" rel="noopener">
+              {l.label} ↗
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .detail {
+    max-width: 900px;
+  }
+  .back {
+    display: inline-block;
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+  }
+  .back:hover {
+    color: var(--accent);
+  }
+  .detail-header {
+    margin-bottom: var(--space-5);
+  }
+  .card-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .detail-header h1 {
+    margin-block: var(--space-2);
+  }
+  .detail-summary {
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+  .meta-row,
+  .tag-row {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  .meta-row li {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .meta-row strong {
+    color: var(--fg);
+    margin-right: 0.35rem;
+  }
+  .hero-media {
+    margin-bottom: var(--space-5);
+  }
+  .cover {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  .prose {
+    margin-block: var(--space-5);
+  }
+  .prose :global(p) {
+    margin-bottom: var(--space-3);
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .gallery :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

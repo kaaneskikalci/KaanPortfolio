@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, SOCIALS } from '../consts';
+
+const socials = SOCIALS.filter((s) => s.url);
+---
+
+<BaseLayout title="Contact">
+  <div class="container">
+    <h1 class="section-heading">Contact</h1>
+    <p class="section-intro">
+      For work, collaborations, or questions — get in touch.
+    </p>
+
+    <p>
+      <a class="button" href={`mailto:${SITE.email}`}>Email me</a>
+    </p>
+
+    {
+      socials.length > 0 && (
+        <ul class="contact-links">
+          {socials.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-links {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+</style>
