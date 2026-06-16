@@ -41,8 +41,7 @@ export const SKILLS = [
 // External profiles. Leave a url empty ('') to hide that link.
 // Fill these in with your real profiles when ready.
 export const SOCIALS = [
-  { label: 'GitHub', url: 'https://https://github.com/kaaneskikalci.com/' },
-  { label: 'LinkedIn', url: 'www.linkedin.com/in/kaaneskikalci' },
- { label: 'itch.io', url: 'https://kaaneskikalci.itch.io' },
- ,
+  { label: 'GitHub', url: 'https://github.com/kaaneskikalci' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/kaaneskikalci/' },
+  { label: 'itch.io', url: 'https://kaaneskikalci.itch.io' },
 ];
