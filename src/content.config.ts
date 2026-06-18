@@ -38,10 +38,12 @@ const dev = defineCollection({
     z.object({
       ...shared(image),
       engine: z.string(), // Unity / Unreal / Custom
+      order: z.number().optional(), // manual sort position (lower = first)
       language: z.array(z.string()).default([]),
       repo: z.string().optional(),
       playable: z.string().optional(), // itch.io / WebGL build link
       video: z.string().optional(),
+      gallery: z.array(image()).default([]), // screenshots shown below the write-up
       highlights: z.array(z.string()).default([]), // 2-4 "what I built" bullets
     }),
 });

@@ -93,6 +93,22 @@ const { Content } = await render(entry);
     <div class="prose">
       <Content />
     </div>
+
+    {
+      data.gallery.length > 0 && (
+        <div class="gallery">
+          {data.gallery.map((img, i) => (
+            <Image
+              src={img}
+              alt={`${data.title} — screenshot ${i + 1}`}
+              widths={[600, 1200]}
+              sizes="(max-width: 700px) 100vw, 50vw"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      )
+    }
   </article>
 </BaseLayout>
 
@@ -175,5 +191,17 @@ const { Content } = await render(entry);
   }
   .prose :global(p) {
     margin-bottom: var(--space-3);
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+  .gallery :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
   }
 </style>

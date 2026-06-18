@@ -3,9 +3,12 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 
-// Featured projects first, then newest year first.
+// Manual order first (lower `order` = earlier). Projects with an `order` come
+// before those without; ties / unordered fall back to newest year first.
 const projects = (await getCollection('dev')).sort((a, b) => {
-  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  const ao = a.data.order ?? Infinity;
+  const bo = b.data.order ?? Infinity;
+  if (ao !== bo) return ao - bo;
   return b.data.year - a.data.year;
 });
 ---
