@@ -9,7 +9,7 @@ featured: false
 cover: ../../assets/ui-dealer-sim/cover.jpg
 video: "Zoj0scFVzKI"
 links:
-  - label: "Full UI · PDF"
+  - label: "UI Design Dealer Simulator"
     url: "/files/ui-design-dealer-sim.pdf"
 ---
 
