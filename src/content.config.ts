@@ -8,7 +8,8 @@ const shared = (image: () => ReturnType<typeof z.any>) => ({
   summary: z.string(), // one-line hook shown on the card
   role: z.string(),
   tools: z.array(z.string()),
-  year: z.number(),
+  year: z.number(), // used for sorting; for display, `period` overrides if set
+  period: z.string().optional(), // optional date range to show instead, e.g. "2022–2025"
   cover: image(),
   featured: z.boolean().default(false),
   links: z

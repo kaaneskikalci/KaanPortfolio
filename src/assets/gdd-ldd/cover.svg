@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Game Design Documents">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1e25"/>
+      <stop offset="1" stop-color="#101218"/>
+    </linearGradient>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23272f"/>
+      <stop offset="1" stop-color="#1b1e25"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- Stacked document pages -->
+  <g transform="translate(560 210) rotate(-9)">
+    <rect width="360" height="470" rx="14" fill="url(#page)" stroke="#2a2e36" stroke-width="2"/>
+    <rect x="36" y="40" width="160" height="14" rx="7" fill="#6ea8fe"/>
+    <g fill="#3a3f49">
+      <rect x="36" y="84" width="288" height="9" rx="4"/>
+      <rect x="36" y="108" width="288" height="9" rx="4"/>
+      <rect x="36" y="132" width="220" height="9" rx="4"/>
+      <rect x="36" y="186" width="288" height="9" rx="4"/>
+      <rect x="36" y="210" width="288" height="9" rx="4"/>
+      <rect x="36" y="234" width="180" height="9" rx="4"/>
+    </g>
+  </g>
+
+  <g transform="translate(700 200) rotate(7)">
+    <rect width="360" height="470" rx="14" fill="url(#page)" stroke="#2a2e36" stroke-width="2"/>
+    <rect x="36" y="40" width="120" height="14" rx="7" fill="#6ea8fe"/>
+    <g fill="#3a3f49">
+      <rect x="36" y="84" width="288" height="9" rx="4"/>
+      <rect x="36" y="108" width="240" height="9" rx="4"/>
+      <rect x="36" y="162" width="288" height="9" rx="4"/>
+      <rect x="36" y="186" width="288" height="9" rx="4"/>
+      <rect x="36" y="210" width="288" height="9" rx="4"/>
+      <rect x="36" y="234" width="160" height="9" rx="4"/>
+    </g>
+  </g>
+
+  <!-- Label -->
+  <text x="800" y="770" text-anchor="middle"
+        font-family="Segoe UI, system-ui, sans-serif" font-size="34"
+        letter-spacing="8" fill="#9aa0aa">GAME DESIGN DOCUMENTS</text>
+  <text x="800" y="850" text-anchor="middle"
+        font-family="Segoe UI, system-ui, sans-serif" font-size="40" font-weight="700"
+        letter-spacing="2" fill="#f2f3f5">GDD &amp; LDD</text>
+</svg>

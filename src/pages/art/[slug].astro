@@ -30,7 +30,7 @@ const videoIds = data.videos.length > 0 ? data.videos : data.video ? [data.video
       <p class="detail-summary">{data.summary}</p>
       <ul class="meta-row">
         <li><strong>Role</strong> {data.role}</li>
-        <li><strong>Year</strong> {data.year}</li>
+        <li><strong>Year</strong> {data.period ?? data.year}</li>
       </ul>
       {
         data.tools.length > 0 && (
