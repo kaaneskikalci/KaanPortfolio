@@ -11,11 +11,11 @@ videos:
   - o5Ve9L5i0o8
   - ORfBeYIZtZ8
 links:
-  - label: "Opening Cutscene · Pre-Production"
+  - label: "The Other One · Pre-Production"
     url: "/files/opening-cutscene-preproduction.pdf"
-  - label: "Opening Cutscene · Production Report"
+  - label: "The Other One · Production Report"
     url: "/files/opening-cutscene-production-report.pdf"
-  - label: "Awakening Cutscene · Design Document"
+  - label: "Awakening · Design Document"
     url: "/files/awakening-cutscene-design-document.pdf"
 ---
 
@@ -26,6 +26,6 @@ pacing to set the mood of a scene.
 The most challenging part was fitting the animations correctly to the character
 rig.
 
-The first video is the **opening cutscene**, with its pre-production plan and
-production report below. The second is the **Awakening** in-game cutscene, with
-its design document.
+The first video is **The Other One**, with its pre-production plan and production
+report below. The second is the **Awakening** in-game cutscene, with its design
+document.
