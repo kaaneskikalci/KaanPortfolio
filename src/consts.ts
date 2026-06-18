@@ -17,8 +17,56 @@ export const SITE = {
 export const NAV_LINKS = [
   { href: '/art', label: 'Art & Game Design' },
   { href: '/dev', label: 'Game Development' },
+  { href: '/resume', label: 'Resume & Certificates' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+];
+
+// Downloadable CV/resume (lives in public/files/).
+export const RESUME = {
+  file: '/files/cv-kaan-eskikalci.pdf',
+};
+
+// Certificates shown on the Resume & Certificates page. Each links to its PDF
+// in public/files/. Fill in `issuer` / `date` where they're blank — `date` is
+// shown only when set (free text, e.g. "Mar 2025").
+export const CERTIFICATES = [
+  {
+    title: 'Unreal Engine 5: The Complete Beginner’s Course',
+    issuer: 'Udemy',
+    date: '',
+    file: '/files/unreal-beginners-course.pdf',
+  },
+  {
+    title: 'Unreal Engine 5: Action Adventure Game Development Course',
+    issuer: 'Udemy',
+    date: '',
+    file: '/files/unreal-action-adventure.pdf',
+  },
+  {
+    title: 'Unreal Engine 5: Blueprints First Person Shooter (FPS)',
+    issuer: 'Udemy',
+    date: '',
+    file: '/files/unreal-fps-blueprints.pdf',
+  },
+  {
+    title: 'Create & Design a Modern 3D House in Blender',
+    issuer: 'Udemy',
+    date: '',
+    file: '/files/blender-modern-3d-house.pdf',
+  },
+  {
+    title: 'Excel’de Veri Yönetimi ve Raporlama',
+    issuer: 'Bilgi University',
+    date: '',
+    file: '/files/excel-veri-yonetimi-raporlama.pdf',
+  },
+  {
+    title: 'İş Sağlığı ve Güvenliği',
+    issuer: 'Bilgi University',
+    date: '',
+    file: '/files/is-sagligi-ve-guvenligi.pdf',
+  },
 ];
 
 // Skills grouped for the About page. Edit freely — these render as labelled

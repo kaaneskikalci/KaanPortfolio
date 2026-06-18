@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, RESUME, CERTIFICATES } from '../consts';
+---
+
+<BaseLayout
+  title="Resume & Certificates"
+  description={`Resume and certificates of ${SITE.name}.`}
+>
+  <div class="container">
+    <h1 class="section-heading">Resume &amp; Certificates</h1>
+    <p class="section-intro">
+      My CV and the courses I&rsquo;ve completed.
+    </p>
+
+    <!-- Resume / CV -->
+    <section class="resume-card">
+      <div>
+        <h2 class="resume-title">Curriculum Vitae</h2>
+        <p class="resume-sub">Full resume — education, skills, and experience.</p>
+      </div>
+      <div class="resume-actions">
+        <a class="button" href={RESUME.file} target="_blank" rel="noopener">
+          View CV
+        </a>
+        <a class="button button--ghost" href={RESUME.file} download>
+          Download
+        </a>
+      </div>
+    </section>
+
+    <!-- Certificates -->
+    <h2 class="certs-heading">Certificates</h2>
+    <div class="cert-grid">
+      {
+        CERTIFICATES.map((c) => (
+          <a class="cert-card" href={c.file} target="_blank" rel="noopener">
+            <span class="cert-badge">PDF</span>
+            <h3 class="cert-title">{c.title}</h3>
+            <p class="cert-meta">
+              {[c.issuer, c.date].filter(Boolean).join(' · ')}
+            </p>
+            <span class="cert-link">View certificate →</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ---- Resume / CV banner ---- */
+  .resume-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-6);
+  }
+  .resume-title {
+    font-size: 1.3rem;
+  }
+  .resume-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: var(--space-1);
+  }
+  .resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  /* ---- Certificates grid ---- */
+  .certs-heading {
+    margin-bottom: var(--space-4);
+  }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+  .cert-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--fg);
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .cert-card:hover {
+    opacity: 1;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .cert-badge {
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.1rem 0.5rem;
+  }
+  .cert-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  .cert-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    min-height: 1.2em;
+  }
+  .cert-link {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .resume-actions {
+      width: 100%;
+    }
+  }
+</style>
