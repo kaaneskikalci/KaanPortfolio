@@ -1,12 +1,13 @@
 # PLAN.md — Kaan Eskikalci Portfolio Website
 
 > Living document. We update this together as the project progresses.
-> Last updated: 2026-06-07
+> Last updated: 2026-06-18
 
 ## Progress (current status)
 
-**Built and working — Phases 0–7 done.** The site scaffolds, builds (11 pages),
-and renders cleanly on desktop and mobile. Run it with `npm run dev`.
+**Built, deployed, and filled with real content — Phases 0–9 done.** The site is
+live on Vercel and now showcases real projects on both sides. Run it locally with
+`npm run dev`.
 
 - ✅ Phase 0 — Astro project scaffolded (Node already installed)
 - ✅ Phase 1 — Layout, sticky nav (mobile hamburger), footer, global theme
@@ -17,9 +18,38 @@ and renders cleanly on desktop and mobile. Run it with `npm run dev`.
   video / Sketchfab embeds
 - ✅ Phase 6 — About (bio, photo, grouped skills) + Contact
 - ✅ Phase 7 — Sitemap, robots.txt, SEO meta, README, accessibility basics
-- ⬜ Phase 8 — Deploy to Vercel (push to GitHub, then import — your step)
-- ⬜ Phase 9 — Replace placeholder content with real projects
+- ✅ Phase 8 — Deployed to Vercel; live and auto-redeploys on every push
+- ✅ Phase 9 — Real content in place (see "Real content" below); all
+  placeholders removed
 - ⬜ Phase 10 — Custom domain (later)
+
+### Real content (current)
+- **Real photo** on the About page (`src/assets/portrait.jpg`).
+- **Socials fixed** (GitHub/LinkedIn URLs) in `src/consts.ts`.
+- **New section — Resume & Certificates** (`/resume`): CV download + 6
+  certificate PDFs. Data lives in `RESUME` / `CERTIFICATES` in `src/consts.ts`;
+  PDFs are in `public/files/`.
+- **Art & Game Design — 5 real projects** (sorted alphabetically): 3D Modern
+  House, 3D Animation on Blender, Unreal Engine Cutscene Studies, GDD & LDD
+  Examples, UI Design — Dealer Sim.
+- **Development — 6 real projects** (manual `order`): KAM (graduation project,
+  featured), 8/9, Yerinde Duramayan Adam, Unreal FPS Shooter, Unreal Action
+  Adventure, Unity 2D Action.
+- **Documents as PDFs:** `.docx` files are converted to PDF (via Word) and
+  served from `public/files/`, linked from a project's `links`.
+
+### Schema/template additions made during Phase 9
+- Art: `videos` (string[]) — show multiple YouTube videos on one detail page.
+- Art/Dev shared: `period` (string) — display a date range (e.g. "2022–2025")
+  instead of a single `year` (which is still used for sorting).
+- Dev: `gallery` (image[]) — screenshot grid on dev detail pages (mirrors art).
+- Dev: `order` (number) — manual sort position on `/dev` (lower = first; items
+  without `order` fall back to newest year).
+
+> **Dev note:** after adding/removing a content `.md` file or changing the
+> schema, the Astro dev server's content cache can go stale (errors like
+> `ImageNotFound` / `LocalImageUsedWrongly`). Fix: stop the dev server, delete
+> `.astro` and `node_modules/.vite`, then restart.
 
 ### Defaults chosen during the build (easy to change)
 - **Theme:** dark by default (makes renders/screenshots pop). All colors are
@@ -85,6 +115,7 @@ A small, scannable site. Two showcase sections are the heart of it.
 ├── /dev               Development — grid of code/engine projects
 │   └── /dev/[slug]    Single dev project (tech stack, repo/build links, write-up)
 │
+├── /resume            Resume & Certificates — CV download + certificate PDFs
 ├── /about             Short bio, skills, software/engines, photo
 └── /contact           Email + links (LinkedIn, GitHub, itch.io, ArtStation)
                        (can also just live in the footer + About)
@@ -117,27 +148,31 @@ missing title) is caught at build time.
 | `role` | string | e.g. "Level Designer", "Gameplay Programmer" |
 | `tools` | string[] | Tags: Unreal, Unity, Blender, C++, C#, Substance… |
 | `year` | number | For sorting |
+| `period` | string? | Optional display date range (e.g. "2022–2025"); overrides `year` in the UI |
 | `cover` | image | Thumbnail used on the grid card |
 | `featured` | boolean | Pin to top of section / show on home |
 | `description` | Markdown body | Full write-up below the frontmatter |
-| `links` | array | `{ label, url }` — repo, itch.io, store page, ArtStation |
+| `links` | array | `{ label, url }` — repo, itch.io, store page, ArtStation, or PDF docs |
 
 ### Art-specific
 | Field | Type | Notes |
 |-------|------|-------|
 | `gallery` | image[] | Multiple renders/screenshots |
 | `sketchfab` | string? | Sketchfab model embed ID (optional) |
-| `video` | string? | YouTube/Vimeo ID for turntables/walkthroughs |
+| `video` | string? | Single YouTube/Vimeo ID for turntables/walkthroughs |
+| `videos` | string[] | Multiple YouTube IDs shown in order (hero); takes precedence over `video` |
 | `medium` | string | e.g. "3D Environment", "Level Design", "Concept" |
 
 ### Dev-specific
 | Field | Type | Notes |
 |-------|------|-------|
 | `engine` | string | Unity / Unreal / Custom |
+| `order` | number? | Manual sort position on `/dev` (lower = first) |
 | `language` | string[] | C++, C#, HLSL… |
 | `repo` | string? | GitHub URL |
 | `playable` | string? | itch.io / WebGL build link |
 | `video` | string? | Gameplay trailer (YouTube/Vimeo ID) |
+| `gallery` | image[] | Screenshot grid shown below the write-up |
 | `highlights` | string[] | 2–4 bullet "what I built" points for fast scanning |
 
 **Key difference:** Art entries lead with **visuals** (gallery/3D/video first,
