@@ -3,6 +3,7 @@ title: Unreal FPS Shooter Game
 summary: An FPS I rebuilt from scratch to learn Unreal Blueprints.
 role: Developer
 engine: Unreal Engine
+order: 4
 language: ["Blueprints"]
 tools: ["Unreal Engine", "Blueprints", "GitHub"]
 year: 2024

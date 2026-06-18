@@ -3,6 +3,7 @@ title: Unity 2D Action Game
 summary: A 2D action game I rebuilt from scratch in Unity.
 role: Developer
 engine: Unity
+order: 6
 language: ["C#"]
 tools: ["Unity", "C#", "GitHub", "JetBrains Rider"]
 year: 2023

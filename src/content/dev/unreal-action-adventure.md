@@ -3,6 +3,7 @@ title: Unreal Action Adventure Game
 summary: An action-adventure game I rebuilt from scratch in Unreal.
 role: Developer
 engine: Unreal Engine
+order: 5
 language: ["Blueprints"]
 tools: ["Unreal Engine", "Blueprints", "GitHub"]
 year: 2024

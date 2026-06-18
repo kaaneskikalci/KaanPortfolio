@@ -3,6 +3,7 @@ title: Yerinde Duramayan Adam (Game Jam)
 summary: A small game we made for a Game Jam.
 role: Developer
 engine: Unity
+order: 3
 language: ["C#"]
 tools: ["Unity", "C#", "GitHub", "Miro", "JetBrains Rider"]
 year: 2022
