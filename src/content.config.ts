@@ -25,7 +25,8 @@ const art = defineCollection({
       medium: z.string(), // e.g. "3D Environment", "Level Design"
       gallery: z.array(image()).default([]),
       sketchfab: z.string().optional(), // Sketchfab model embed id
-      video: z.string().optional(), // YouTube/Vimeo id
+      video: z.string().optional(), // single YouTube/Vimeo id (hero)
+      videos: z.array(z.string()).default([]), // multiple YouTube ids (shown in order)
     }),
 });
 
